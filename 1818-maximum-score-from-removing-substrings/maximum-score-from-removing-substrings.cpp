@@ -59,7 +59,7 @@ public:
                     if (s[i] == 'b' & s[i-1] == 'a'){
                         res += x;
                         s.erase(i-1, 2);
-                        i-=3;
+                        i-=2;
                         if(i<=0) i=0;
                         count++;
                     }
@@ -75,7 +75,7 @@ public:
                         res += y;
                         s.erase(i-1, 2);
                         count++;
-                        i-=3;
+                        i-=2;
                         if(i<=0) i=0;
                     }
                 }
@@ -91,7 +91,7 @@ public:
                     if (s[i] == 'a' & s[i-1] == 'b'){
                         res += y;
                         s.erase(i-1, 2);
-                        i-=3;
+                        i-=2;
                         if(i<=0) i=0;
                         count++;
                     }
@@ -107,7 +107,7 @@ public:
                         res += x;
                         s.erase(i-1, 2);
                         count++;
-                        i-=3;
+                        i-=2;
                         if(i<=0) i=0;
                     }
                 }
