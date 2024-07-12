@@ -11,67 +11,61 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        
-        int sum = 0;
-        ListNode* ans = new ListNode;
-        ListNode* l3 = ans;
+        ListNode* l3 = l1;
+        ListNode* ans = l1;
+        int carry = 0;
 
         while (true){
-            
-            sum = l1->val + l2->val + sum;
+            l3->val += l2->val + carry;
 
-            if (sum >= 10) {
-                l3->val = sum - 10;
-                sum = 1;
+            if (l3->val >= 10){
+                l3->val-=10;
+                carry = 1;
             }
-            else{
-                l3->val = sum;
-                sum = 0;
+            else carry = 0;
+
+            if (l2 ->next == nullptr || l3 ->next == nullptr){
+                break;
             }
-            l1 = l1->next;
+
+            l3 = l3->next;
             l2 = l2->next;
+        }
 
-            if (l1 != nullptr && l2 != nullptr){
+        if (l3->next == nullptr){
+            l3->next = l2->next;
+        }
+        if (l3->next == nullptr){
+            if (carry == 1){
                 l3->next = new ListNode;
-                l3 = l3->next;
+                l3->next->val = 1;
+                return ans;
             }
-            else{
-                ListNode* l4;
-                if (l1 == nullptr) l4 = l2;
-                else l4 = l1;
+        }
+        else{
+            l3 = l3->next;
+        }
 
-                if (l4){
-                    l3->next = new ListNode;
-                    l3 = l3->next;
-                }
+        while(l3){
+            l3->val += carry;
 
-                while(l4){
-                    sum = l4->val + sum;
-                    if (sum >= 10) {
-                        l3->val = sum - 10;
-                        sum = 1;
-                    }
-                    else{
-                        l3->val = sum;
-                        sum = 0;
-                    }
-                    l4 = l4->next;
-                    if (l4 != nullptr){
-                        l3->next = new ListNode;
-                        l3 = l3->next;
-                    }
-                    else{
-                        break;
-                    }
-                }
-                if (sum == 1){
+            if (l3->val >= 10){
+                l3->val-=10;
+                carry = 1;
+            }
+            else carry = 0;
+
+            if (l3->next == nullptr){
+                if (carry == 1){
                     l3->next = new ListNode;
                     l3->next->val = 1;
                 }
                 break;
             }
+            else{
+                l3 = l3->next;
+            }
         }
-
         return ans;
     }
 };
